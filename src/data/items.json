@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "Coffee",
+        "description": "one spoon of coffee with your spoons of sugar",
+        "price": 100
+    },
+    {
+        "id": 2,
+        "name": "Latte",
+        "description": "one spoon of medium coffee, two spoons of your type of milk with your spoons of sugar",
+        "price": 120
+    },
+    {
+        "id": 3,
+        "name": "Espresso",
+        "description": "one to two spoons of strong caffeinated dark coffee with your spoons of sugar",
+        "price": 70
+    },
+    {
+        "id": 4,
+        "name": "Cappuccino",
+        "description": "equal spoons of coffee and milk with your spoons of sugar",
+        "price": 150
+    },
+    {
+        "id": 5,
+        "name": "Tea",
+        "description": "one spoon of your type of tea with your spoons of sugar",
+        "price": 50
+    },
+    {
+        "id": 6,
+        "name": "Green Tea",
+        "description": "one spoon of your type of green tea with your spoons of sugar",
+        "price": 60
+    },
+    {
+        "id": 7,
+        "name": "Frappuccino",
+        "description": "one to two spoons of medium caffeinated cold coffee with your spoons of sugar. you can add milk",
+        "price": 200
+    },
+    {
+        "id": 8,
+        "name": "Herbs",
+        "description": "one spoon of your type of herbs with your spoons of sugar",
+        "price": 40
+    },
+    {
+        "id": 9,
+        "name": "Water",
+        "description": "just a bottle of water",
+        "price": 20
+    },
+    {
+        "id": 10,
+        "name": "American Coffee",
+        "description": "one to two spoons of medium caffeinated coffee with your spoons of sugar",
+        "price": 140
+    }
+]
