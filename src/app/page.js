@@ -10,47 +10,51 @@ import PriceRangeFilter from "@/components/PriceRangeFilter";
 export default function Page() {
   const [price, setPrice] = useState(0)
   const [sold, setSold] = useState([])
-  const [ascending, setAscending] = useState(true)
-  const [sortByPrice, setSortByPrice] = useState(true)
   const [items, setItems] = useState(data)
 
-  function priceSorting(elements) {
-    if(ascending) {
+  function priceSorting(sort) {
+    let elements = data
+    if(!sort) {
         elements.sort((a, b) => {
-            if(a.price < b.price) return 1
-            if(a.price > b.price) return -1
+          if(a.price < b.price) return 1
+          if(a.price > b.price) return -1
+            
             return 0
         })
     } else {
-        elements.sort((a, b) => {
-            if(a.price > b.price) return 1
-            if(a.price < b.price) return -1
-            return 0
-        })
+      elements.sort((a, b) => {
+        if(a.price > b.price) return 1
+        if(a.price < b.price) return -1
+        return 0
+      })
     }
     setItems(elements)
   }
-  function nameSorting(elements) {
-    if(ascending) {
+  function nameSorting(sort) {
+    let elements = data
+    if(!sort) {
         elements.sort((a, b) => {
-            if(a.name < b.name) return 1
-            if(a.name > b.name) return -1
+          if(a.name < b.name) return 1
+          if(a.name > b.name) return -1
             return 0
         })
     } else {
-        elements.sort((a, b) => {
-            if(a.name > b.name) return 1
-            if(a.name < b.name) return -1
-            return 0
-        })
+      elements.sort((a, b) => {
+        if(a.name > b.name) return 1
+        if(a.name < b.name) return -1
+        return 0
+      })
     }
     setItems(elements)
 }
 
 function search(str) {
   const elements = []
+  str = str.toLowerCase()
   for(let i = 0; i < data.length; i++){
-    if(data[i].name.includes(str) || data[i].description.includes(str)){
+    const name = data[i].name.toLowerCase()
+    const description = data[i].description.toLowerCase()
+    if(name.includes(str) || description.includes(str)){
       elements.push(data[i])
     }
     if(!str) {
@@ -88,19 +92,7 @@ function priceFilter(min, max){
   return (
     <main className="bg-slate-700 m-0 p-10">
       <section>
-        <SortElements ascending={ascending} price={sortByPrice} nameSorting={() => {
-          setSortByPrice(false)
-          nameSorting(items)
-        }} priceSorting={() => {
-          setSortByPrice(true)
-          priceSorting(items)
-        }} setAscending={() => {
-          setAscending(true)
-          sortByPrice ? priceSorting(items) : nameSorting(items)
-          }} setDescending={() => {
-            setAscending(false)
-            sortByPrice ? priceSorting(items) : nameSorting(items)
-            }}/>
+        <SortElements elements={data} sendToParent={(els) => setItems(els)}/>
       </section>
       <section className="my-2">
         <SearchBar setSearchTerm={(e) => search(e)}/>
@@ -114,7 +106,10 @@ function priceFilter(min, max){
         ))}
       </section>
       <section>
-         <ShoppingCart cartItems={sold} price={price}/>
+         <ShoppingCart cartItems={sold} price={price} checkout={() => {
+          setSold([])
+          setPrice(0)
+          }}/>
       </section>
     </main>
   )

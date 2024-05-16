@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ShoppingCart = ({ cartItems, price }) => {
+const ShoppingCart = ({ cartItems, price, checkout }) => {
 
   return (
     <div className='bottom-1/2 fixed right-2.5 p-5 bg-gray-900 rounded-3xl text-cyan-100'>
@@ -14,7 +14,7 @@ const ShoppingCart = ({ cartItems, price }) => {
         ))}
       </ul>
       <p>Total: ${price}</p>
-      <button className='text-slate-300 uppercase bg-cyan-800 p-2 
+      <button onClick={checkout} className='text-slate-300 uppercase bg-cyan-800 p-2 
       rounded-xl hover:text-cyan-800 hover:bg-slate-300 duration-300 transition font-bold mt-2'>Checkout</button>
     </div>
   )
