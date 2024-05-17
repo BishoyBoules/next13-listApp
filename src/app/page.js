@@ -11,42 +11,42 @@ export default function Page() {
   const [price, setPrice] = useState(0)
   const [sold, setSold] = useState([])
   const [items, setItems] = useState(data)
+  const [sortOrder, setSortOrder] = useState("ascending")
+  const [sortType, setSortType] = useState("name")
 
-  function priceSorting(sort) {
-    let elements = data
-    if(!sort) {
-        elements.sort((a, b) => {
-          if(a.price < b.price) return 1
-          if(a.price > b.price) return -1
-            
+  const sortItems = () => {
+    if(sortOrder == "ascending") {
+      if(sortType == "name") {
+        items.sort((a, b) => {
+        if(a.name < b.name) return 1
+        if(a.name > b.name) return -1
             return 0
         })
-    } else {
-      elements.sort((a, b) => {
-        if(a.price > b.price) return 1
-        if(a.price < b.price) return -1
+    } else if(sortType == "price") {
+      items.sort((a, b) => {
+        if(a.price < b.price) return 1
+        if(a.price > b.price) return -1
         return 0
       })
     }
-    setItems(elements)
+    } else if(sortOrder == "descending") {
+              if(sortType == "name") {
+                items.sort((a, b) => {
+                if(a.name > b.name) return 1
+                if(a.name < b.name) return -1
+                return 0
+              })
+              } else if(sortType == "price") {
+                items.sort((a, b) => {
+                  if(a.price > b.price) return 1
+                  if(a.price < b.price) return -1
+                  return 0
+                })
+              }
+            }
+    setItems(items)
+    setItems(items)
   }
-  function nameSorting(sort) {
-    let elements = data
-    if(!sort) {
-        elements.sort((a, b) => {
-          if(a.name < b.name) return 1
-          if(a.name > b.name) return -1
-            return 0
-        })
-    } else {
-      elements.sort((a, b) => {
-        if(a.name > b.name) return 1
-        if(a.name < b.name) return -1
-        return 0
-      })
-    }
-    setItems(elements)
-}
 
 function search(str) {
   const elements = []
@@ -92,7 +92,19 @@ function priceFilter(min, max){
   return (
     <main className="bg-slate-700 m-0 p-10">
       <section>
-        <SortElements elements={data} sendToParent={(els) => setItems(els)}/>
+        <SortElements elements={items} nameSorting={() => {
+          setSortType("name")
+          sortItems()
+        }} priceSorting={() => {
+          setSortType("price")
+          sortItems()
+        }} ascendingSorting={() => {
+          setSortOrder("ascending")
+          sortItems()
+        }} descendingSorting={() => {
+          setSortOrder("descending")
+          sortItems()
+        }} sortType={sortType} sortOrder={sortOrder}/>
       </section>
       <section className="my-2">
         <SearchBar setSearchTerm={(e) => search(e)}/>
